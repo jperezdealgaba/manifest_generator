@@ -1,2 +1,6 @@
 osh:
   openscanhub: "https://github.com/openscanhub/openscanhub"
+DefectDojo:
+  django-defectdojo: "https://github.com/DefectDojo/django-DefectDojo"
+Rapidast:
+  rapidast: https://github.com/RedHatProductSecurity/rapidast
