@@ -1,0 +1,32 @@
+name: manifests-generator
+run-name: Generate manifests
+on:
+  #schedule:
+     #- cron: '30 5 * * *'
+  workflow_dispatch:
+jobs:
+  parse-results:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with: 
+          token: ${{secrets.GH_TOKEN}}
+      - name: Download Syft
+        run: |
+              curl -LJO curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+              python3 rapidast_parser.py --file zap_results/zap_analysis.json
+      - name: Start process
+        run: |
+             python3 rapidast_parser.py --f tools.yaml
+      - name: Commit changes 
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add results/
+          git commit -m "Updated manifests"
+          git push
