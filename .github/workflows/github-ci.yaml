@@ -24,7 +24,7 @@ jobs:
               pip3 install pyyaml GitPython
       - name: Start process
         run: |
-             python3 manifest_generator.py --f tools.yaml
+             python3 manifest_generator.py -f tools.yaml
       - name: Commit changes 
         run: |
           git config user.name github-actions
