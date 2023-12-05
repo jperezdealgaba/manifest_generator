@@ -19,7 +19,6 @@ jobs:
       - name: Download Syft
         run: |
               curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
-              python3 rapidast_parser.py --file zap_results/zap_analysis.json
       - name: Start process
         run: |
              python3 rapidast_parser.py --f tools.yaml
