@@ -5,7 +5,7 @@ on:
      #- cron: '30 5 * * *'
   workflow_dispatch:
 jobs:
-  parse-results:
+  generate-manifests:
     runs-on: ubuntu-latest
     steps:
       - name: Install python
@@ -18,7 +18,7 @@ jobs:
           token: ${{secrets.GH_TOKEN}}
       - name: Download Syft
         run: |
-              curl -LJO curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
+              curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
               python3 rapidast_parser.py --file zap_results/zap_analysis.json
       - name: Start process
         run: |
